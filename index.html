@@ -86,29 +86,35 @@
         </form>
     </div>
     <script>
-        document.getElementById('survey-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            fetch('https://script.google.com/macros/s/AKfycbwRO-mS5qU42pMIgl_sEW5aqUo1CM5VO4UPXn8TVB-zv00_PIL1KmnCSpXjbBPN4X4q/exec', {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => response.json())
-              .then(data => {
-                  if (data.result === 'success') {
-                      alert('Form submitted successfully!');
-                  } else {
-                      alert('There was an error submitting the form.');
-                  }
-              });
+    document.getElementById('survey-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
         });
-    </script>
+
+        console.log('Form data:', data); // Log form data to console
+
+        fetch('YOUR_WEB_APP_URL', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json())
+          .then(data => {
+              console.log('Response data:', data); // Log response data to console
+              if (data.result === 'success') {
+                  alert('Form submitted successfully!');
+              } else {
+                  alert('There was an error submitting the form.');
+              }
+          }).catch(error => {
+              console.error('Error:', error); // Log any errors to console
+              alert('There was an error submitting the form.');
+          });
+    });
+</script>
 </body>
 </html>
