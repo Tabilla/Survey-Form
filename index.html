@@ -46,6 +46,14 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .rating {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .rating label {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -57,12 +65,66 @@
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="row">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">Email (optional):</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="row">
+                <label for="mobile">Mobile Number (optional):</label>
+                <input type="tel" id="mobile" name="mobile">
             </div>
             <div class="row">
                 <label for="feedback">Feedback:</label>
                 <textarea id="feedback" name="feedback" rows="4" required></textarea>
+            </div>
+            <div class="row">
+                <label>Do you like CJ?</label>
+                <div class="rating">
+                    <label><input type="checkbox" name="like_cj" value="1"> 1</label>
+                    <label><input type="checkbox" name="like_cj" value="2"> 2</label>
+                    <label><input type="checkbox" name="like_cj" value="3"> 3</label>
+                    <label><input type="checkbox" name="like_cj" value="4"> 4</label>
+                    <label><input type="checkbox" name="like_cj" value="5"> 5</label>
+                </div>
+            </div>
+            <div class="row">
+                <label>Rate on the scale on how much you like this work CJ has made:</label>
+                <div class="rating">
+                    <label><input type="checkbox" name="rate_work" value="1"> 1</label>
+                    <label><input type="checkbox" name="rate_work" value="2"> 2</label>
+                    <label><input type="checkbox" name="rate_work" value="3"> 3</label>
+                    <label><input type="checkbox" name="rate_work" value="4"> 4</label>
+                    <label><input type="checkbox" name="rate_work" value="5"> 5</label>
+                </div>
+            </div>
+            <div class="row">
+                <label>Would you like to use this webpage as an alternative to paper surveys?</label>
+                <div class="rating">
+                    <label><input type="checkbox" name="use_webpage" value="1"> 1</label>
+                    <label><input type="checkbox" name="use_webpage" value="2"> 2</label>
+                    <label><input type="checkbox" name="use_webpage" value="3"> 3</label>
+                    <label><input type="checkbox" name="use_webpage" value="4"> 4</label>
+                    <label><input type="checkbox" name="use_webpage" value="5"> 5</label>
+                </div>
+            </div>
+            <div class="row">
+                <label>In what chances would I expect that you would like the experiences?</label>
+                <div class="rating">
+                    <label><input type="checkbox" name="like_experience" value="1"> 1</label>
+                    <label><input type="checkbox" name="like_experience" value="2"> 2</label>
+                    <label><input type="checkbox" name="like_experience" value="3"> 3</label>
+                    <label><input type="checkbox" name="like_experience" value="4"> 4</label>
+                    <label><input type="checkbox" name="like_experience" value="5"> 5</label>
+                </div>
+            </div>
+            <div class="row">
+                <label>In a scale from 5 to 1, what is the probability of paper surveys being outdone by online surveys?</label>
+                <div class="rating">
+                    <label><input type="checkbox" name="online_surveys" value="1"> 1</label>
+                    <label><input type="checkbox" name="online_surveys" value="2"> 2</label>
+                    <label><input type="checkbox" name="online_surveys" value="3"> 3</label>
+                    <label><input type="checkbox" name="online_surveys" value="4"> 4</label>
+                    <label><input type="checkbox" name="online_surveys" value="5"> 5</label>
+                </div>
             </div>
             <div class="row">
                 <input type="submit" value="Submit">
