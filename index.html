@@ -13,7 +13,7 @@
             justify-content: center;
             align-items: center;
             height: 200vh;
-            background-color: Cyan
+            background-color: Cyan;
         }
         .container {
             background-color: white;
@@ -65,61 +65,35 @@
                 <input type="text" id="name" name="name" required>
             </div>
             <div class="row">
-                <label for="email">Email or Mobile No. (optional):</label>
-                <input type="email" id="email" name="email">
+                <label for="contact">Email or Mobile No. (optional):</label>
+                <input type="text" id="contact" name="contact">
             </div>
             <div class="row">
                 <label>Do you like CJ?</label>
                 <div class="rating">
-                    <label><input type="checkbox" name="like_cj" value="1"> 1</label>
-                    <label><input type="checkbox" name="like_cj" value="2"> 2</label>
-                    <label><input type="checkbox" name="like_cj" value="3"> 3</label>
-                    <label><input type="checkbox" name="like_cj" value="4"> 4</label>
-                    <label><input type="checkbox" name="like_cj" value="5"> 5</label>
+                    <label><input type="radio" name="like_cj" value="1"> 1</label>
+                    <label><input type="radio" name="like_cj" value="2"> 2</label>
+                    <label><input type="radio" name="like_cj" value="3"> 3</label>
+                    <label><input type="radio" name="like_cj" value="4"> 4</label>
+                    <label><input type="radio" name="like_cj" value="5"> 5</label>
                 </div>
             </div>
             <div class="row">
                 <label>Rate on the scale on how much you like this work CJ has made:</label>
                 <div class="rating">
-                    <label><input type="checkbox" name="rate_work" value="1"> 1</label>
-                    <label><input type="checkbox" name="rate_work" value="2"> 2</label>
-                    <label><input type="checkbox" name="rate_work" value="3"> 3</label>
-                    <label><input type="checkbox" name="rate_work" value="4"> 4</label>
-                    <label><input type="checkbox" name="rate_work" value="5"> 5</label>
+                    <label><input type="radio" name="rate_work" value="1"> 1</label>
+                    <label><input type="radio" name="rate_work" value="2"> 2</label>
+                    <label><input type="radio" name="rate_work" value="3"> 3</label>
+                    <label><input type="radio" name="rate_work" value="4"> 4</label>
+                    <label><input type="radio" name="rate_work" value="5"> 5</label>
                 </div>
             </div>
             <div class="row">
                 <label>Would you like to use this webpage as an alternative to paper surveys?</label>
                 <div class="rating">
-                    <label><input type="checkbox" name="use_webpage" value="1"> 1</label>
-                    <label><input type="checkbox" name="use_webpage" value="2"> 2</label>
-                    <label><input type="checkbox" name="use_webpage" value="3"> 3</label>
-                    <label><input type="checkbox" name="use_webpage" value="4"> 4</label>
-                    <label><input type="checkbox" name="use_webpage" value="5"> 5</label>
+                    <label><input type="radio" name="use_webpage" value="yes"> Yes</label>
+                    <label><input type="radio" name="use_webpage" value="no"> No</label>
                 </div>
-            </div>
-            <div class="row">
-                <label>In what chances would I expect that you would like the experiences?</label>
-                <div class="rating">
-                    <label><input type="checkbox" name="like_experience" value="1"> 1</label>
-                    <label><input type="checkbox" name="like_experience" value="2"> 2</label>
-                    <label><input type="checkbox" name="like_experience" value="3"> 3</label>
-                    <label><input type="checkbox" name="like_experience" value="4"> 4</label>
-                    <label><input type="checkbox" name="like_experience" value="5"> 5</label>
-                </div>
-            </div>
-            <div class="row">
-                <label>In a scale from 5 to 1, what is the probability of paper surveys being outdone by online surveys?</label>
-                <div class="rating">
-                    <label><input type="checkbox" name="online_surveys" value="1"> 1</label>
-                    <label><input type="checkbox" name="online_surveys" value="2"> 2</label>
-                    <label><input type="checkbox" name="online_surveys" value="3"> 3</label>
-                    <label><input type="checkbox" name="online_surveys" value="4"> 4</label>
-                    <label><input type="checkbox" name="online_surveys" value="5"> 5</label>
-                </div>
-                <div class="row">
-                <label for="feedback">Feedback:</label>
-                <textarea id="feedback" name="feedback" rows="4" required></textarea>
             </div>
             <div class="row">
                 <input type="submit" value="Submit">
@@ -127,14 +101,25 @@
         </form>
     </div>
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxu9RqeI9Fz3W6eLqw1hFGMJ8495Jy665xKXGZuwrZKKkegvQ1A4p8mJp3IF0g9VvEl/exec';
-        const form = document.forms['survey-form'];
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => alert('Success!', response))
-                .catch(error => console.error('Error!', error.message));
+        document.getElementById('survey-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            fetch('https://script.google.com/macros/s/AKfycbxu9RqeI9Fz3W6eLqw1hFGMJ8495Jy665xKXGZuwrZKKkegvQ1A4p8mJp3IF0g9VvEl/exec', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json())
+              .then(result => {
+                  alert('Form submitted successfully!');
+              }).catch(error => {
+                  console.error('Error:', error);
+              });
         });
     </script>
 </body>
