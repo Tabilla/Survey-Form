@@ -12,7 +12,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200vh;
+            height: 100vh;
             background-color: Cyan;
         }
         .container {
@@ -20,8 +20,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300%;
-            max-width: 1000px;
+            width: 100%;
+            max-width: 600px;
         }
         .row {
             margin-bottom: 15px;
@@ -46,14 +46,6 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        .rating {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-        .rating label {
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
@@ -69,31 +61,24 @@
                 <input type="text" id="contact" name="contact">
             </div>
             <div class="row">
-                <label>Do you like CJ?</label>
-                <div class="rating">
-                    <label><input type="radio" name="like_cj" value="1"> 1</label>
-                    <label><input type="radio" name="like_cj" value="2"> 2</label>
-                    <label><input type="radio" name="like_cj" value="3"> 3</label>
-                    <label><input type="radio" name="like_cj" value="4"> 4</label>
-                    <label><input type="radio" name="like_cj" value="5"> 5</label>
-                </div>
+                <label for="question1">1. Is this page helpful?</label>
+                <textarea id="question1" name="question1" required></textarea>
             </div>
             <div class="row">
-                <label>Rate on the scale on how much you like this work CJ has made:</label>
-                <div class="rating">
-                    <label><input type="radio" name="rate_work" value="1"> 1</label>
-                    <label><input type="radio" name="rate_work" value="2"> 2</label>
-                    <label><input type="radio" name="rate_work" value="3"> 3</label>
-                    <label><input type="radio" name="rate_work" value="4"> 4</label>
-                    <label><input type="radio" name="rate_work" value="5"> 5</label>
-                </div>
+                <label for="question2">2. How did you find this page?</label>
+                <textarea id="question2" name="question2" required></textarea>
             </div>
             <div class="row">
-                <label>Would you like to use this webpage as an alternative to paper surveys?</label>
-                <div class="rating">
-                    <label><input type="radio" name="use_webpage" value="yes"> Yes</label>
-                    <label><input type="radio" name="use_webpage" value="no"> No</label>
-                </div>
+                <label for="question3">3. What other improvements do you wish to see in this page?</label>
+                <textarea id="question3" name="question3" required></textarea>
+            </div>
+            <div class="row">
+                <label for="question4">4. Would you rather answer in a paper reviewer or in an online reviewer?</label>
+                <textarea id="question4" name="question4" required></textarea>
+            </div>
+            <div class="row">
+                <label for="question5">5. Would you recommend this page and the author to someone you know who is in dire need of online survey host?</label>
+                <textarea id="question5" name="question5" required></textarea>
             </div>
             <div class="row">
                 <input type="submit" value="Submit">
@@ -108,17 +93,20 @@
             formData.forEach((value, key) => {
                 data[key] = value;
             });
-            fetch('https://script.google.com/macros/s/AKfycbwUxeZoz8LoAshgxrELRBZlZMEQbdh1wd5gxqHx9Q8IoUXTPu0mUQzJZrZmlLZx8_k/exec', {
+
+            fetch('https://script.google.com/macros/s/AKfycbyvTjWYL6IG4HRGOEXpNoueBND6ctI-IjRBfFqsRZLHxkOnY_i0ZGP1lWihDoJpKLSn/exec', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then(response => response.json())
-              .then(result => {
-                  alert('Form submitted successfully!');
-              }).catch(error => {
-                  console.error('Error:', error);
+              .then(data => {
+                  if (data.result === 'success') {
+                      alert('Form submitted successfully!');
+                  } else {
+                      alert('There was an error submitting the form.');
+                  }
               });
         });
     </script>
